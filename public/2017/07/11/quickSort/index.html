@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>quickSort | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="快排的核心在partition，它先选取一个枢轴(pivot)，然后想办法把它放到一个位置，使得它左边的数都比它小，右边的都比它大。 qsort函数递归调用自己，因此外封装一个quickSort函数。代码中注释部分为第一次写快排犯下的错误，今后需要多多注意。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363">
+<meta name="keywords" content="algorithm, c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="quickSort">
+<meta property="og:url" content="http://yoursite.com/2017/07/11/quickSort/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="快排的核心在partition，它先选取一个枢轴(pivot)，然后想办法把它放到一个位置，使得它左边的数都比它小，右边的都比它大。 qsort函数递归调用自己，因此外封装一个quickSort函数。代码中注释部分为第一次写快排犯下的错误，今后需要多多注意。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363">
+<meta property="og:updated_time" content="2017-07-11T11:23:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="quickSort">
+<meta name="twitter:description" content="快排的核心在partition，它先选取一个枢轴(pivot)，然后想办法把它放到一个位置，使得它左边的数都比它小，右边的都比它大。 qsort函数递归调用自己，因此外封装一个quickSort函数。代码中注释部分为第一次写快排犯下的错误，今后需要多多注意。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-quickSort" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-quickSort" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/11/quickSort/" class="article-date">
   <time datetime="2017-07-11T11:17:23.000Z" itemprop="datePublished">2017-07-11</time>
@@ -74,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/quickSort/">quickSort</a>
+    <h1 class="article-title" itemprop="name">
+      quickSort
     </h1>
   
 
@@ -99,152 +102,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/11/hello-world/" class="article-date">
-  <time datetime="2017-07-11T08:34:22.000Z" itemprop="datePublished">2017-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2017/07/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/11/hello-world/" data-id="cj4zhnjvb0004a261w8da91lp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="ctrl-ctrl多选失效" class="article article-type-ctrl" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/04/ctrl多选失效/" class="article-date">
-  <time datetime="2017-07-04T15:35:24.000Z" itemprop="datePublished">2017-07-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/04/ctrl多选失效/">ctrl多选失效</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="解决MacOSX下的VMWare中Ubuntu按ctrl不能多选文件的问题"><a href="#解决MacOSX下的VMWare中Ubuntu按ctrl不能多选文件的问题" class="headerlink" title="解决MacOSX下的VMWare中Ubuntu按ctrl不能多选文件的问题"></a>解决MacOSX下的VMWare中Ubuntu按ctrl不能多选文件的问题</h2><p>在VMWare中，虚拟机 -&gt; 设置 -&gt; 键盘与鼠标 -&gt; 将默认的配置文件改为Mac的配置文件。</p>
-<p>注意：这个方法可以解决ctrl不能实现多选的问题，但是会使得Mac的快捷键在虚拟机中失效，例如command+c在虚拟机中不能再复制，需要使用ctrl+c。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/04/ctrl多选失效/" data-id="cj4zhnjv30001a261wfpacsa9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PalindromeNumber" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/01/PalindromeNumber/" class="article-date">
-  <time datetime="2017-07-01T02:32:05.000Z" itemprop="datePublished">2017-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/01/PalindromeNumber/">PalindromeNumber</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题目：Determine whether an integer is a palindrome. Do this without extra space.</p>
-<p>思路：不能转成字符串来处理，因为不允许额外空间。直接将原数取反后，和原数进行比较。</p>
-<p>特殊情况：</p>
-<ul>
-<li>负数不是回文数字，因此直接判定FALSE。</li>
-<li>只要是回文数字，就不会出现溢出。若溢出，则一定不是回文数字。</li>
-</ul>
-<p>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="keyword">int</span> t = x, y = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> (t &gt; <span class="number">0</span>)&#123;</div><div class="line">                y = y * <span class="number">10</span> + t % <span class="number">10</span>;</div><div class="line">                t = t / <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> x == y;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>提交虽然通过了，但看网上一些大牛的答案，考虑了计算过程中不溢出的要求。例如，上面代码中，当<code>y * 10 &gt; 2^31 - 1</code>就会发生溢出，截断高位后加上<code>t % 10</code>，就可能和原来的数相等。因此另一种保证不溢出的思路是，<strong>每次取最高和最低位比较，然后掐头去尾后重复进行。</strong></p>
-<p>以数字95349为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">95349 % 10 =&gt; 9</div><div class="line">95349 / 10000 =&gt; 95349 / 10^4 =&gt; 9</div></pre></td></tr></table></figure>
-<p>可以看出我们可以通过模10来取其最低位，除<code>10^(n-1)</code>来取其最高位，将其最高位和最低位进行比较，便可以得出当前是否符合回文要求了。</p>
-<p>比较完最高位和最低位后，如何除掉这两位呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">95349 % 1000 =&gt; 95349 % 10^4 = 5349</div><div class="line">95349 / 10 = 9534</div></pre></td></tr></table></figure>
-<p>如此一来，便完成了掐头去尾了。</p>
-<p>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = x, h = <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    <span class="keyword">while</span> (a / h &gt;= <span class="number">10</span>) &#123;</div><div class="line">        h = h * <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (a &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (a / h != a % <span class="number">10</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        a = a % h;</div><div class="line">        a = a / <span class="number">10</span>;</div><div class="line">        h = h / <span class="number">100</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure>
-<p>参考：<a href="https://segmentfault.com/a/1190000000453441" target="_blank" rel="external">https://segmentfault.com/a/1190000000453441</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/01/PalindromeNumber/" data-id="cj4zhnjuz0000a261qjc9odx8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         

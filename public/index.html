@@ -61,6 +61,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-quickSort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/quickSort/" class="article-date">
+  <time datetime="2017-07-11T11:17:23.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/quickSort/">quickSort</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>快排的核心在partition，它先选取一个枢轴(pivot)，然后想办法把它放到一个位置，使得它左边的数都比它小，右边的都比它大。</p>
+<p>qsort函数递归调用自己，因此外封装一个quickSort函数。代码中注释部分为第一次写快排犯下的错误，今后需要多多注意。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">List</span>&#123;</span></div><div class="line">	<span class="keyword">int</span> size;</div><div class="line">	<span class="keyword">int</span> arr[<span class="number">100</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(List* L, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> temp;</div><div class="line">	temp = L-&gt;arr[low];</div><div class="line">	L-&gt;arr[low] = L-&gt;arr[high];</div><div class="line">	L-&gt;arr[high] = temp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(List* L, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> pivotkey = L-&gt;arr[low];  <span class="comment">// select first element as pivot</span></div><div class="line">	<span class="keyword">while</span>(low&lt;high)   <span class="comment">// missing this cannot sort same elements </span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">while</span>(low&lt;high &amp;&amp; L-&gt;arr[high] &gt;= pivotkey) <span class="comment">// &gt;= not &gt;</span></div><div class="line">			high--;</div><div class="line">		swap(L, low, high);</div><div class="line">		<span class="keyword">while</span>(low&lt;high &amp;&amp; L-&gt;arr[low] &lt;= pivotkey)</div><div class="line">			low++;</div><div class="line">		swap(L, low, high);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> low;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(List* L, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> pivot;</div><div class="line">	<span class="keyword">if</span>(low&lt;high)&#123;   <span class="comment">// missing this will segment fault</span></div><div class="line">		pivot = partition(L, low, high);</div><div class="line">		qsort(L, low, pivot<span class="number">-1</span>);</div><div class="line">		qsort(L, pivot+<span class="number">1</span>, high);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(List* L)</span></span>&#123;</div><div class="line">	qsort(L, <span class="number">0</span>, L-&gt;size<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="function">fstream <span class="title">input</span><span class="params">(<span class="string">"input.txt"</span>)</span></span>;</div><div class="line">	<span class="keyword">if</span>(!input.is_open())&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"cannot open."</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	List L;</div><div class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(input &gt;&gt; L.arr[i++])&#123;</div><div class="line">		L.size = i;</div><div class="line">	&#125;</div><div class="line">	quickSort(&amp;L);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;L.size; j++)&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; L.arr[j] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/11/quickSort/" data-id="cj4zhnjva0003a261wfmtwx6b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm-c/">algorithm, c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/11/hello-world/" class="article-date">
@@ -96,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/11/hello-world/" data-id="cj4zbxht10003aj61z87gh6ql" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/11/hello-world/" data-id="cj4zhnjvb0004a261w8da91lp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/04/ctrl多选失效/" data-id="cj4zbxhsw0001aj616e39y7sk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/04/ctrl多选失效/" data-id="cj4zhnjv30001a261wfpacsa9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -191,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/01/PalindromeNumber/" data-id="cj4zbxhsr0000aj61q3ziwx43" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/01/PalindromeNumber/" data-id="cj4zhnjuz0000a261qjc9odx8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
@@ -215,7 +257,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-c/">algorithm, c++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
     </div>
   </div>
 
@@ -225,7 +267,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a>
+      <a href="/tags/algorithm-c/" style="font-size: 10px;">algorithm, c++</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a>
     </div>
   </div>
 
@@ -245,6 +287,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/11/quickSort/">quickSort</a>
+          </li>
         
           <li>
             <a href="/2017/07/11/hello-world/">Hello World</a>
